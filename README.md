@@ -1,6 +1,6 @@
 # CRUD App with SQLite
 
-This is a simple CRUD (Create, Read, Update, Delete) application built using Node.js, Bootstrap, DataTables, EJS, and SQLite.
+This is a simple CRUD (Create, Read, Update, Delete) application built using Node.js, Bootstrap, Sweetalert2, DataTables, EJS, and SQLite.
 
 ## Features
 
@@ -15,6 +15,7 @@ This is a simple CRUD (Create, Read, Update, Delete) application built using Nod
 
 - Node.js
 - Bootstrap
+- Sweetalert2
 - DataTables
 - EJS
 - SQLite
