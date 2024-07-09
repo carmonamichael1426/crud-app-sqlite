@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>CRUD App</title>
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+      <!-- DataTables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+   </head>
+   <body>
+      <div class="container mt-4">
+         <h1>CRUD App</h1>
+         <!-- Table to display items -->
+         <table id="itemTable" class="table table-striped table-bordered">
+            <thead>
+               <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody>
+               <% items.forEach(item => { %>
+               <tr>
+                  <td><%= item.id %></td>
+                  <td><%= item.name %></td>
+                  <td><%= item.description %></td>
+                  <td>
+                     <a href="/item/edit/<%= item.id %>" class="btn btn-primary btn-sm">Edit</a>
+                     <form id="deleteForm_<%= item.id %>" action="/item/delete/<%= item.id %>" method="POST" style="display: inline">
+                        <button type="button" onclick="deleteItem('<%= item.id %>')" class="btn btn-danger btn-sm">Delete</button>
+                     </form>
+                  </td>
+               </tr>
+               <% }); %>
+            </tbody>
+         </table>
+         <!-- Link to add new item -->
+         <a href="/item/add" class="btn btn-success">Add New Item</a>
+      </div>
+
+      <!-- jQuery and Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- DataTables JS -->
+      <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+      <!-- SweetAlert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+         $(document).ready(function () {
+            $('#itemTable').DataTable();
+         });
+
+         function deleteItem(id) {
+            Swal.fire({
+               title: 'Are you sure?',
+               text: 'Do you want to delete this item?',
+               icon: 'question',
+               showCancelButton: true,
+               confirmButtonColor: '#d33',
+               cancelButtonColor: '#3085d6',
+               confirmButtonText: 'Yes, delete it!',
+            }).then(result => {
+               if (result.isConfirmed) {
+                  // Submit the form programmatically
+                  document.getElementById('deleteForm_' + id).submit();
+               }
+            });
+         }
+      </script>
+   </body>
+</html>
